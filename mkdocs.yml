@@ -1,4 +1,5 @@
 site_name: Docs
+site_url: docs.monoquant.com
 markdown_extensions:
   - attr_list
   - md_in_html
