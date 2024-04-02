@@ -1,5 +1,5 @@
 site_name: Docs
-site_url: docs.monoquant.com
+site_url: https://docs.monoquant.com
 markdown_extensions:
   - attr_list
   - md_in_html
@@ -32,7 +32,7 @@ nav:
       - 'Data Point': data_nodes/Data_Point.md
       - 'Stat Data Point': data_nodes/Stat_Data_Point.md
       - 'Finish - TA Datapoint': data_nodes/TA_Data_Point.md
-      - 'TODO - Community Data Point': data_nodes/Community_Data_Point.md
+      # - 'TODO - Community Data Point': data_nodes/Community_Data_Point.md
   - 'TODO - Backtesting Engine': backtesting_engine_overview.md
 #  - Trading Terminal:
 #      - 'TODO - Overview': trading_terminal/trading_terminal_overview.md
@@ -44,7 +44,7 @@ nav:
   - MONQ:
       - 'TODO - What is MONQ?': monq/what_is_monq.md
       - 'TODO - Staking': monq/staking.md
-  - Roadmap: roadmap.md
+  - TODO - Roadmap: roadmap.md
 
 
 
