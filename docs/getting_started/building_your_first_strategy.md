@@ -92,7 +92,7 @@ together here?
     long losing streaks (can your strategy and/or you survive a long losing streak when you go live?), outliers (these 
     1-2 trades that made most of returns in your strategy might not happen when you go live).
 
-Also, check out our guide on [Understanding Backtest Results](Understanding_backtest_results.md) 
+[//]: # (Also, check out our guide on [Understanding Backtest Results]&#40;Understanding_backtest_results.md&#41; )
 
 [//]: # (And check out our [Tips on Creating Good Strategies](Tips_on_creating_good_strategies.md))
 
