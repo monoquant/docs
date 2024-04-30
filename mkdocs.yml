@@ -17,6 +17,7 @@ nav:
   - Getting Started:
       - 'TODO - What is the Strategy Builder?': getting_started/what_is_the_strategy_builder.md
       - 'TODO - Building your first strategy': getting_started/building_your_first_strategy.md
+      - 'TODO - Building your first AI strategy?': getting_started/building_your_first_ai_strategy.md
       - 'TODO - Understanding Backtesting Results': getting_started/understanding_backtest_results.md
   - Strategy Builder:
       - 'REVIEW - Strategy Details': strategy_nodes/Strategy_Details.md
