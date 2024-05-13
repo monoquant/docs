@@ -50,7 +50,7 @@ nav:
   #     - 'TODO - Start Paper Trading Your Strategy'
   #     - 'TODO - Live Signals'
   # - TODO - Social Trading: social_trading/social_trading_overview.md
-  - MONQ:
+  - $MONQ:
       - 'What is MONQ?': monq/what_is_monq.md
       - 'Tokenomics': monq/tokenomics.md
       - 'Staking': monq/staking.md
