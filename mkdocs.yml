@@ -19,27 +19,35 @@ nav:
       - 'TODO - Building your first strategy': getting_started/building_your_first_strategy.md
       - 'TODO - Understanding Backtesting Results': getting_started/understanding_backtest_results.md
   - Strategy Builder:
-      - 'REVIEW - Strategy Details': strategy_nodes/Strategy_Details.md
-      - 'REVIEW - Create Signal': strategy_nodes/Create_Signal.md
+      - 'Strategy Details': strategy_nodes/Strategy_Details.md
+      - 'Create Signal': strategy_nodes/Create_Signal.md
       - 'FINISH - Non Trading Times': strategy_nodes/Non_Trading_Times.md
 #          - 'Position Data Point': strategy_nodes/Position_Data_Point.md
-      - 'REVIEW - Scale in': strategy_nodes/Scale_In.md
-      - 'REVIEW - Signal Group': strategy_nodes/Signal_Group.md
-      - 'REVIEW - Take Profit': strategy_nodes/Take_Profit.md
-      - 'REVIEW - Trailing Take Profit': strategy_nodes/Trailing_Take_Profit.md
+      - 'Scale in': strategy_nodes/Scale_In.md
+      - 'Signal Group': strategy_nodes/Signal_Group.md
+      - 'Take Profit': strategy_nodes/Take_Profit.md
+      - 'Trailing Take Profit': strategy_nodes/Trailing_Take_Profit.md
       - 'UPDATE - AI Models': data_nodes/AI_Models.md
       - 'Arithmetic Data Points': data_nodes/Arithmetic_Data_Point.md
       - 'Data Point': data_nodes/Data_Point.md
       - 'Stat Data Point': data_nodes/Stat_Data_Point.md
       - 'Finish - TA Datapoint': data_nodes/TA_Data_Point.md
       # - 'TODO - Community Data Point': data_nodes/Community_Data_Point.md
-  - 'TODO - Backtesting Engine': backtesting_engine_overview.md
-#  - Trading Terminal:
-#      - 'TODO - Overview': trading_terminal/trading_terminal_overview.md
-#      - 'TODO - Settings': trading_terminal/trading_terminal_settings.md
-#      - 'TODO - Interface': trading_terminal/trading_terminal_interface.md
-#      - 'TODO - Trading': trading_terminal/trading_terminal_trading.md
-#      - 'TODO - Orders': trading_terminal/trading_terminal_orders.md
+  # - 'TODO - Backtesting Engine': 
+  #     - Backtesting Engine: backtesting_engine_overview.md
+  #     - Backtesting Results: 
+  # - Trading Terminal:
+  #     - 'TODO - Overview': trading_terminal/trading_terminal_overview.md
+  #     - 'TODO - Settings': trading_terminal/trading_terminal_settings.md
+  #     - 'TODO - Interface': trading_terminal/trading_terminal_interface.md
+  #     - 'TODO - Trading': trading_terminal/trading_terminal_trading.md
+  #     - 'TODO - Orders': trading_terminal/trading_terminal_orders.md
+  # - Live Trading:
+  #     - 'TODO - Putting a Strategy Live': 
+  # - Paper Trading:
+  #     - 'TODO - What is Paper Trading?'
+  #     - 'TODO - Start Paper Trading Your Strategy'
+  #     - 'TODO - Live Signals'
   - TODO - Social Trading: social_trading/social_trading_overview.md
   - MONQ:
       - 'TODO - What is MONQ?': monq/what_is_monq.md
