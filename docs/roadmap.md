@@ -35,6 +35,9 @@ This outlines what is built right now, and ready to launch:
 - **Live Strategy Analysis**: Enable the strategy builder for monitoring and modifying strategies based on live market data.
 - **Analytical Tools**: Tools to filter through assets and provide in-depth analysis about individual assets (heatmaps, orderbook volume, etc.) or market groups such as ingoing/outgoing funds into */USD groups.
 
+- **Early Alpha Build of the Terminal**
+![Alpha Terminal Build](terminal_alpha.png)
+
 ## Dataset Release 1
 - **DeFI Market Data**: Introduction of data from Uniswap, Pancakeswap, Jupyter, and Raydium.
 - **Stable Coin Indexes**: Indexes of all buy & sell volume across supported exchanges.
