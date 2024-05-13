@@ -76,7 +76,19 @@ This oscillator is especially useful for identifying trend reversals and confirm
 | `1.5`          | Float | A positive value like 1.5 suggests upward momentum, while a negative value indicates downward momentum |
 
 
-### Bias
+### Bias Indicator
+The Bias Indicator is a straightforward technical analysis tool used to determine the direction and strength of a market trend over a given period. It calculates the difference between the current closing price and the average price over a specified number of past days. This difference highlights whether the current price is above or below the historical average, indicating a bullish or bearish bias.
+
+The Bias Indicator helps traders understand the underlying trend momentum and provides insights that can be used to anticipate future price movements. A positive value indicates that the current price is higher than the average, suggesting a bullish trend, while a negative value implies a bearish trend.
+
+| Input        | Default | Description                                                         |
+|:-------------|:--------|:--------------------------------------------------------------------|
+| `Length`     | 14      | The number of periods used to calculate the moving average from which the current price is subtracted to derive the Bias. |
+
+| Output Example            | Type  | Description                                                                       |
+|:--------------------------|:------|:----------------------------------------------------------------------------------|
+| `Bias: +2.5`              | Float | Indicates the current Bias value. A positive number suggests a bullish bias in the market, while a negative value indicates a bearish bias.
+
 
 ### Balance of Power (BoP)
 The Balance of Power (BoP) is an indicator used to measure the market strength of buyers versus sellers by comparing the extent to which prices are pushed to levels above or below the opening price.
