@@ -27,6 +27,7 @@ This outlines what is built right now, and ready to launch:
 
 ## Multi-Asset Release
 - **Cross-Asset Trading Strategies**: Ability to make trades on multiple assets based on other assets, enabling cross-asset arbitrage strategies.
+- **Scanner**: Ability to scan multiple assets or entire markets for the specified logic.
 
 ## Terminal Release
 - **Enhanced Manual Execution**: Upgrade of the automated executor to allow manual interventions like setting infinite trailing stops and activating breakeven stops.
