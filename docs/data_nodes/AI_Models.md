@@ -75,6 +75,11 @@ Here are the current labelling methods that are available to use on the AI model
 5. `Generic` Generates training label signals based off the future outcome similar to triple barrier but with more flexibility
 6. `AI Candles Cluster` Generates training label signals based off unsupervised clustering of candlestick patterns. The user can specify the number of clusters and the period over which the clusters are calculated.
 7. `AI Cluster` Generates training label signals based off unsupervised clustering of OHLCV data and other metrics. The user can specify the number of clusters and the period over which the clusters are calculated.
+8. `MinMax` Generates training label signals based on the min and max price over a given period.
+9. `Peaks and Troughs` Generates training label signals based on the peaks and troughs of the price over a given period. 
+10. `Risk Reward` Generates training label signals based on the risk reward ratio of the trade. 
+11. `Fixed Time Horizon` Generates training label signals based on fixed period for example we want to train our model to predict trades that will conclude within 12 periods, winning trades are used as the positive class and losing trades are used as the negative class.
+
 
 ### Feature Selection 
 Contains options of the feature selection methods for best aligning with your Y predictor
@@ -103,7 +108,7 @@ To view parameter explanation please click on the model to view its documentatio
 
 ## **Feature Selection**
 
-### Correlation
+### Correlation (Pearson, Kendall, Spearman)
 Correlation-based feature selection involves measuring the correlation between each feature and the target variable. Features with low correlation or no correlation with the target variable are considered less important and can be removed from the dataset.
 
 ---
@@ -135,6 +140,18 @@ Chi-squared test is a statistical test used to determine the association between
 
 ### Fisher Score
 Fisher score, also known as Fisher discriminant analysis or Fisher's linear discriminant, is a method used for feature selection in classification problems. It evaluates the discriminative power of each feature by comparing the between-class variance to the within-class variance.
+
+### Mutual Information
+Mutual information is a measure of the mutual dependence between two variables. It quantifies the amount of information obtained about one variable by observing another variable. Mutual information is commonly used in feature selection to identify relevant features for prediction tasks.
+
+### L1 Regularization
+L1 regularization, also known as Lasso regularization, adds a penalty term to the loss function based on the absolute values of the coefficients. It encourages sparsity in the model by shrinking less important features to zero, effectively performing feature selection.
+
+### Percentile
+Percentile feature selection selects the top k percentile of features based on their scores. It allows users to specify the percentage of features to retain.
+
+### Linear Regression
+Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. We rank the coefficients of the linear regression model to select the most important features.
 
 ## **Evaluation metrics**
 
