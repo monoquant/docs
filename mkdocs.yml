@@ -16,13 +16,15 @@ extra_css: [extra_css.css]
 nav:
   - Getting Started:
       - 'What is the Strategy Builder?': getting_started/what_is_the_strategy_builder.md
-      - 'Building your first strategy': getting_started/building_your_first_strategy.md
-      - 'Building your first AI strategy?': getting_started/building_your_first_ai_strategy.md
+      - 'Building Your First Strategy': getting_started/building_your_first_strategy.md
+      - 'Building Your First AI Strategy?': getting_started/building_your_first_ai_strategy.md
+      - 'Understanding Backtesting Engine': general_docs/backtesting_engine.md
+      - 'Setup Telegram Notifications': getting_started/setup_telegram_notifications.md
       # - 'TODO - Understanding Backtesting Results': getting_started/understanding_backtest_results.md
   - Strategy Builder:
       - 'Strategy Details': strategy_nodes/Strategy_Details.md
       - 'Create Signal': strategy_nodes/Create_Signal.md
-      # - 'FINISH - Non Trading Times': strategy_nodes/Non_Trading_Times.md
+      - Non Trading Times': strategy_nodes/Non_Trading_Times.md
 #     - 'Position Data Point': strategy_nodes/Position_Data_Point.md
       - 'Scale in': strategy_nodes/Scale_In.md
       - 'Signal Group': strategy_nodes/Signal_Group.md
@@ -34,9 +36,6 @@ nav:
       - 'Stat Data Point': data_nodes/Stat_Data_Point.md
       - 'TA Datapoint': data_nodes/TA_Data_Point.md
       # - 'TODO - Community Data Point': data_nodes/Community_Data_Point.md
-  # - 'TODO - Backtesting Engine': 
-  #     - Backtesting Engine: backtesting_engine_overview.md
-  #     - Backtesting Results: 
   # - Trading Terminal:
   #     - 'TODO - Overview': trading_terminal/trading_terminal_overview.md
   #     - 'TODO - Settings': trading_terminal/trading_terminal_settings.md
@@ -45,10 +44,8 @@ nav:
   #     - 'TODO - Orders': trading_terminal/trading_terminal_orders.md
   # - Live Trading:
   #     - 'TODO - Putting a Strategy Live': 
-  # - Paper Trading:
-  #     - 'TODO - What is Paper Trading?'
-  #     - 'TODO - Start Paper Trading Your Strategy'
-  #     - 'TODO - Live Signals'
+  - Paper Trading:
+      - 'Paper Trading Overview': paper_trading/paper_trading_overview.md
   # - TODO - Social Trading: social_trading/social_trading_overview.md
   - $MONQ:
       - 'What is MONQ?': monq/what_is_monq.md
