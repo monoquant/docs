@@ -206,3 +206,17 @@ For example, an excess kurtosis of -1 means that the distribution is less prone 
 thinner tails than a normal distribution.
 
 
+### Risk of Ruin
+
+Risk of Ruin is the probability that you will lose so much capital that you can no longer continue trading.
+
+```math
+\text{Kelly Fraction} = \text{Win Rate} - \text{Lose Rate}
+```
+
+```math
+\text{Risk of Ruin \%} = \left( \frac{\text{Lose Rate}}{\text{Win Rate}} \right)^{\frac{\text{Stop Loss %}}{\text{Kelly Fraction}}}
+```
+
+In cases when Kelly Fraction is equal to 0, for example, when Win Rate and Lose Rate both are equal to 0.5, then the 
+Risk of Ruin will equal 100% because the strategy has no edge. 
