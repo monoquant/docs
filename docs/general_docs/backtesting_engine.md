@@ -10,12 +10,11 @@ TLDR
 
 #### Overview of how our Backtesting Engine works
 
-The backtest runs on the "OHLCV candles" data until any single or multiple of the conditions created by the user are triggered. 
-Once the condition(s) are met, the engine goes to the trades data aggregated at 1 millisecond resolution to identify in 
-which order the conditions are triggered and executes all actions in that order. This allows our engine to execute 
-multiple different actions in a single candle and at the realistic price of execution rather than just at the 
-candle closing price. This is especially important for the cases when volatility is high in which cases you might execute 
-multiple take profits at the same candle or, for example, open the trade, execute take profit and then exit with a stop loss.
+The backtest runs on the trades data aggregated at 1 millisecond. This allows our engine to get the order of execution 
+of actions right and to execute multiple different actions within a single candle and at the realistic price rather than 
+just at the candle closing or open price. This is especially important for the cases when volatility is high in which 
+cases you might execute multiple take profits at the same candle or, for example, open the trade, execute take profit 
+and then exit with a stop loss - all in a single candle.
 
 Below is a made up example of how price might move within a single candle during high volatility, and for your backtests
 to be accurate it is important to know which prices were hit first which might radically change performance of your strategy.

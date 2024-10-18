@@ -1,12 +1,14 @@
-## Overview 
+## Overview
 
 The Strategy details node is the main node in the strategy, it is where all of your nodes terminate, and where you can 
 dial in your risk levels with the additional settings.
 
 ## Node Connections
+
 Nodes are connected to the Strategy Details node in the following ways
 
 ### Take Profits
+
 You can attach as many take profits to the strategy as you like, these will be triggered when the conditions specified 
 per take profit are met, you can have unlimited take profits, the limit is the minimum order size of the exchange, and 
 the % you are exiting.
@@ -17,26 +19,40 @@ the % you are exiting.
     the strategy details node, and they are set to exit 25%, 50% and 75%, the last node to be triggered (75%) would 
     only exit 25%, due to there only being 25% of the position left to exit.
 
+### Trailing Stop Loss
+
+While normal stop loss is computed, for example, for Long trades as `entry_price * (1 - stop_loss)`, if you turn the 
+`trailing_stop_loss` on, your stop loss would be computed from the most favourable price seen since the trade was opened.
+The formula in that case would be `most_favourable_price * (1 - stop_loss)`. In case of Long trades, as the price keeps 
+going up, `most_favourable_price` will keep being updated and your stop_loss will keep going up with the price. In case 
+of Short trades if trailing if `trailing_stop_loss` option is on, as the price goes down, your stop loss price will keep
+going down with it. 
+
 ### Scale In
+
 You can also attach as many scale ins to the strategy as you like, these will be triggered when the conditions 
 specified per scale in are met, you can have unlimited scale ins, the limit is the minimum order size of the exchange, 
 and the % you are entering.
 
 ### No Trading Times
+
 You can attach as many no trading times to the strategy as you like, these will stop the strategy trading, during the 
 hours you specify, you can have unlimited non trading times
 
 ### OR | Entry Logic
+
 This is where you can attach either a `Create Signal` or a `Signal Group` node, these will be evaluated to determine if 
 the strategy should enter a trade or increase your current position, this behaviour can also be modified by the 
 `Strategy Details` , you can have unlimited nodes attached to the `OR | Entry Logic` node.
 
 ### OR | Exit Logic
+
 This is where you can attach either a `Create Signal` or a `Signal Group` node, these will be evaluated to determine 
 if the strategy should reduce the amount held in a position, you can have unlimited nodes attached to the 
 `OR | Entry Logic` node.
 
 ### Hybrid AI Optimization
+
 This is where you can attach a `Hybrid AI Optimization` node, this will allow you to optimize your strategy using AI, 
 you can only have one attached to the `Hybrid AI Optimization` connection.
 
@@ -55,7 +71,7 @@ This option is important for when your signal is based on multiple different tim
 options here:
 
 1. **compute_on_min_timeframe** - all individual signals are going to be converted to the smallest time frame for that
-   specific signal. Usually this will produce more signals. 
+   specific signal. Usually this will produce more signals.
 
 2. **compute_on_max_timeframe** - all individual signals are going to be converted to the highest time frame for that 
    specific signal. Usually this will produce fewer signals.
@@ -128,7 +144,9 @@ only at 00:30.
 
 
 ---
+
 ## Inputs
+
 ![signal_group_example](images/strategy_details.png)
 
 | Name                                |   Type   |                                                                                                   Description                                                                                                   |
