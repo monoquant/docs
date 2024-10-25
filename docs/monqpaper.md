@@ -156,6 +156,9 @@ The “Monq” token will become a foundation for enabling further development w
 | Seed Raise         | 9.0%           | 15.0%               | 1.35%                           | 3              | 12               |
 | Future Raise       | 5.0%           | 0.0%                | 0.00%                           | 12             | 0                |
 
+![Vesting.png](Vesting.png)
+![Inflation.png](Inflation.png)
+
 ---
 
 ## Tokenomics
