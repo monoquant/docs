@@ -6,6 +6,8 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
 theme:
   name: material
   logo: logo-white.png
@@ -13,6 +15,8 @@ theme:
     scheme: slate
   favicon: img/favicon.ico
 extra_css: [extra_css.css]
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - Getting Started:
       - 'What is the Strategy Builder?': getting_started/what_is_the_strategy_builder.md
@@ -47,14 +51,7 @@ nav:
   - Paper Trading:
       - 'Paper Trading Overview': paper_trading/paper_trading_overview.md
   # - TODO - Social Trading: social_trading/social_trading_overview.md
-  - $MONQ:
-      - 'What is MONQ?': monq/what_is_monq.md
-      - 'Tokenomics': monq/tokenomics.md
-      - 'Staking': monq/staking.md
-      - 'Achievements': monq/achievements.md
-      - 'Sponsored Trading Competitions': monq/sponsored_trading.md
-      # - 'TODO - Copy Trading': monq/copy_trading.md
-      - 'Monq Market': monq/monq_market.md
+  - $MONQ: monqpaper.md
   - Roadmap: roadmap.md
 
 
