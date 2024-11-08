@@ -51,6 +51,19 @@ This is where you can attach either a `Create Signal` or a `Signal Group` node, 
 if the strategy should reduce the amount held in a position, you can have unlimited nodes attached to the 
 `OR | Entry Logic` node.
 
+### Delay Entry Options
+
+These don't have any effect on `Profit Scaling` meaning that profit scaling would be triggered once conditions are 
+satisfied. Choose 0 to turn off.
+
+* `Periods Between Entries` - how many min TF periods should pass before making an additional entry whether you enter 
+  into a new position or add to your existing position on a signal. This parameter doesn't affect Profit Scaling. 
+  Choose 0 to turn off.
+
+* `Periods Delay After Consecutive Wins/Losses` - How many min TF periods should pass after your strategy had X _consecutive_ 
+  Winning or Losing positions. `Consecutive Wins` and `Consecutive Losses` parameters allow you to choose conditions 
+  to trigger this delay. This parameter takes priority over the `Periods Between Entries` parameter.
+
 ### Hybrid AI Optimization
 
 This is where you can attach a `Hybrid AI Optimization` node, this will allow you to optimize your strategy using AI, 
