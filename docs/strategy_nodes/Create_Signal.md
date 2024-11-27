@@ -9,18 +9,23 @@
 ## Comparisons
 You can choose from the following comparison operators: >, <, >=, <=, !=, ==, Cross Over, Cross Under
 
-* Datapoint A **>** Datapoint B
-* Datapoint A **<** Datapoint B
-* Datapoint A **>=** Datapoint B
-* Datapoint A **==** Datapoint B
-* Datapoint A **!=** Datapoint B
-* Datapoint A **Cross Over** Datapoint B
-* Datapoint A **Cross Under** Datapoint B
+* Datapoint A **>** _(greater than)_ Datapoint B
+* Datapoint A **<** _(less than)_ Datapoint B
+* Datapoint A **>=** _(greater than or equal)_ Datapoint B
+* Datapoint A **<=** _(less than or equal)_ Datapoint B
+* Datapoint A **==** _(is equal to)_ Datapoint B
+* Datapoint A **!=** _(is not equal to)_ Datapoint B
+* Datapoint A **Cross Over** _(in previous period A < B and in current A > B)_ Datapoint B
+* Datapoint A **Cross Under** _(in previous period A > B and in current A < B)_ Datapoint B
 
-!!! warning "Regarding Data Points"
+!!! warning "Regarding RAW Data Points"
     **When using `raw` datapoints, it can only be compared to another `raw` on the same timeframe, other combinations, if they work, might produce unexpected results.**
     
     `raw` can also be compared to non-raw datapoints on the same tf without issues (they might even have different tfs, but that's also not recommended)
+
+If you want to check if a pre-build Indicator or TA pattern was triggered, you need to compare it to 1 to check if it was
+triggered, and to 0 to check if it wasn't triggered. Please, refer to the screenshot at the bottom for an example using
+TA Data Points (ENTRY 2 and EXIT 1).
 
 ## Example
 For example, for a very common trend trading strategies, you can use Cross Over / Cross Under operators to create your signals:
