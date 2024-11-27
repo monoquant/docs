@@ -1,37 +1,59 @@
 ### What is the `AI Models` Node?  
-- The AI Models node is where you can train and test your AI models to improve the performance of your trading strategies.
-- You can select from a range of classification and regression models to predict the outcome of trades based on historical data.
-- The AI Models node allows you to fine-tune the parameters of each model by ticking `Advanced`
-- You also have the ability to let the model perform hyperparameter optimization to find the best parameters for your dataset, by not ticking `Advanced`
+- The AI Model node is where you can train/test AI models and also the node used for hybrid optimization of an existing strategy. 
+- You can select from a range of classification and regression models.
+- The AI Model node allows you to fine-tune the parameters of each model by ticking `Manual Tuning`
+- You also have the ability to let the model perform hyperparameter optimization to find the best parameters for your dataset, by not ticking `Manual Tuning`
 
 <img src="/data_nodes/images/ai_model_labeled.png" />     
 
 ## **How to use the AI Models node**
-The AI models card consists of 8 constant features that will and each model has its own subset of parameters you can tune. 
+The AI model card consists of constant elements and dynamic specific elements that relate to a particular model. 
+
 
 ### AI Model Name
-You use this to set the name of your AI model, this is also used to load a model that has been previously trained
+You use this to set the desired name for the model. This is also used to load a model that has been previously trained on your account.
 
 ### Model Selection
-Here you will find all the models/algorithims that are avaliable to use on our platform. Models are broken down into 3 groups: 
+Here you will find all the models that are available to use on our platform. Models are broken down into 3 groups: 
 
-- Classifiers
-- Regressors
-- Neural Networks
+- Classifiers - Aim to predict market trends that reach desired Y outcomes 
+- Regressors - Aim to predict market prices over a given period of time
+- ~~Neural Networks~~ (Coming soon)
 
 ### Train Switch
-This determines wether the model will be trained on this iteration or not
+Ticking this will allow the model to train, if not selected and no model exists with same name, it will train a new model.
 
 !!! info "Regarding Naming"
     If you have an already trained model, with the same name, re-training will overwrite previous trained model with that name.
 
+### Manual Tuning
+Expands options for selected model, where you can then tune model parameters, if unsure leave unticked and our optimization engine will handle it.
+
+### Normalize Data
+This allows you to normalize the data before training the model. Normalization is a common preprocessing step that scales the data to a standard range such as -1 to 1 or 0 - 1. This can help models have better performance, and it's model dependant.
+
+### Validation Methods
+This allows you to select the validation method that the model will use to evaluate its performance. The available validation methods are: 
+- Hold-out (default)
+- K-Fold 
+- Purged K-Fold 
+- Walk-Forward
+
+### Evaluation Data Handler
+Data selection method. The options are: 
+- Sliding window (default) uses data in original order 
+- Resample data shuffles data before splitting
+- Chunk selection selects data in chunks
+
+
 ### Class balancing
 This allows you to select which class balancing methods you would like to use. The ones available are:
-
-1. SMOTE (Synthetic Minority Over-sampling Technique): SMOTE is a popular oversampling technique used to address class imbalance. It works by creating synthetic samples from the minority class rather than replicating them. This is done by selecting similar instances (neighbors) and creating new examples along the line segments connecting these instances in the feature space. By generating synthetic examples, SMOTE aims to balance the class distribution without introducing exact duplicates of existing minority class samples.
-2. ADASYN (Adaptive Synthetic Sampling): ADASYN is an extension of the SMOTE technique that adapts the generation of synthetic samples according to the density of minority class instances. It focuses more on generating samples in regions of the feature space where the density of minority instances is low. By doing so, ADASYN aims to alleviate the problem of overfitting that may occur with SMOTE in regions of high minority class density.
-3. Undersampling: Undersampling involves reducing the number of instances in the majority class to balance its distribution with the minority class. This can be achieved by randomly removing instances from the majority class until the desired balance is achieved. While undersampling is a straightforward approach, it may lead to loss of information since it discards potentially valuable data from the majority class.
-4. Oversampling: Oversampling involves increasing the number of instances in the minority class to balance its distribution with the majority class. This can be done by replicating existing instances, generating synthetic samples (as in SMOTE and ADASYN), or other techniques. Oversampling aims to ensure that the classifier is exposed to a sufficient number of minority class examples during training, thereby improving its ability to generalize.
+- SMOTE (Synthetic Minority Over-sampling Technique): SMOTE is a popular oversampling technique used to address class imbalance. It works by creating synthetic samples from the minority class rather than replicating them. This is done by selecting similar instances (neighbors) and creating new examples along the line segments connecting these instances in the feature space. By generating synthetic examples, SMOTE aims to balance the class distribution without introducing exact duplicates of existing minority class samples.
+- ADASYN (Adaptive Synthetic Sampling): ADASYN is an extension of the SMOTE technique that adapts the generation of synthetic samples according to the density of minority class instances. It focuses more on generating samples in regions of the feature space where the density of minority instances is low. By doing so, ADASYN aims to alleviate the problem of overfitting that may occur with SMOTE in regions of high minority class density.
+- Undersampling: Undersampling involves reducing the number of instances in the majority class to balance its distribution with the minority class. This can be achieved by randomly removing instances from the majority class until the desired balance is achieved. While undersampling is a straightforward approach, it may lead to loss of information since it discards potentially valuable data from the majority class.
+- Oversampling: Oversampling involves increasing the number of instances in the minority class to balance its distribution with the majority class. This can be done by replicating existing instances, generating synthetic samples (as in SMOTE and ADASYN), or other techniques. Oversampling aims to ensure that the classifier is exposed to a sufficient number of minority class examples during training, thereby improving its ability to generalize.
+- Random Undersampling: Similar to the Undersampling method, Random Undersampling involves randomly removing instances from the majority class to balance the class distribution. This approach is simple to implement but may result in the loss of valuable information from the majority class.
+- Random Oversampling: Similar to the Oversampling method, Random Oversampling involves randomly replicating instances from the minority class to balance the class distribution. This approach is straightforward but may lead to overfitting if not carefully implemented.
 
 !!! info "Further Class balancing refinements for SMOTE/ADASYN"
     - Minority:
@@ -60,35 +82,31 @@ This allows you to select which class balancing methods you would like to use. T
     This method suggests considering the entire dataset, including all classes, for class balancing techniques.
     It involves addressing class imbalances collectively across all classes present in the dataset.
 
-### Label Filters
-weather you want to filter labels that were only
 
 ### Labelling method 
 Allows you to select the labelling method the model will use as the Y predictor.
 
-Here are the current labelling methods that are available to use on the AI models card - Triple Barrier Generates training label signals based on the triple barrier method. The user can specify the barrier width and the period over which the barrier is calculated.
-
-1. `Signficant Change` Generates training label signals based on the percentage change in price over a given period. The user can specify the percentage change threshold and the period over which the change is calculated.
-2. `PCT Change Matrix` Generates training label signals based on a matrix of percentage changes in price over a given period. The user can specify the period over which the changes are calculated.
-3. `Mean Reversion` Generates training labels signals based off bolinger bands. The user can specify the period over which the bands are calculated.
-4. `Future Price` Generates training label signals based off the future price of the asset
-5. `Generic` Generates training label signals based off the future outcome similar to triple barrier but with more flexibility
-6. `AI Candles Cluster` Generates training label signals based off unsupervised clustering of candlestick patterns. The user can specify the number of clusters and the period over which the clusters are calculated.
-7. `AI Cluster` Generates training label signals based off unsupervised clustering of OHLCV data and other metrics. The user can specify the number of clusters and the period over which the clusters are calculated.
+Here are the current labelling methods that are available to use on the AI models card - 
+1. `Risk Reward` Generates training label signals based on the risk reward ratio parameters. You can specify the threshold for your TP(Take Profit), Risk and Reward Factor.
+2. `Triple Barrier` Generates training label signals based on the triple barrier method. The user can specify the barrier width and the period over which the barrier is calculated.
+3. `PCT Change Matrix` Generates training label signals based on a matrix of percentage changes in price over a given period. The user can specify the period over which the changes are calculated.
+3. `Mean Reversion` Generates training labels signals based off bollinger bands. The user can specify the period over which the bands are calculated.
+5. `Generic` Generates training label signals based off the future outcome similar to triple barrier with 1:1 risk ratio
+6. `AI Candles Cluster` Generates training label signals based off AI Inference of candles. The user can specify the number of clusters and the period over which the clusters are calculated.
+7. `AI Cluster` Generates training label signals based off AI Inference of OHLCV data and other proprietary metrics. The user can specify the number of clusters and the period over which the clusters are calculated.
 8. `MinMax` Generates training label signals based on the min and max price over a given period.
 9. `Peaks and Troughs` Generates training label signals based on the peaks and troughs of the price over a given period. 
-10. `Risk Reward` Generates training label signals based on the risk reward ratio of the trade. 
 11. `Fixed Time Horizon` Generates training label signals based on fixed period for example we want to train our model to predict trades that will conclude within 12 periods, winning trades are used as the positive class and losing trades are used as the negative class.
 
 
 ### Feature Selection 
-Contains options of the feature selection methods for best aligning with your Y predictor
+Contains options for feature selection methods that models have access too. Each method attempts to sort and select best possible features that align with feature selection method.
 
 ### Feature Count
-The number of features you want to use 
+Number of features you want the model to train with, encourage you to experiment with different feature values to find best performing range for your model. 
 
 ## **Available Models**
-To view parameter explanation please click on the model to view its documentation on the scikit-learn platform.
+To view parameter explanation please click on the model below to see more details on their documentation on the scikit-learn platform.
 
 
 ### Classification models
@@ -99,7 +117,7 @@ To view parameter explanation please click on the model to view its documentatio
 - [K-nearest neighbours](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
 - [Adaboost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html)
 - [Catboost](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier)
-- [LSTM](https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM)
+- ~~[LSTM](https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM)~~(Coming soon)
 
 ### Regression Models
 - [Support vector regression](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html)
@@ -108,28 +126,20 @@ To view parameter explanation please click on the model to view its documentatio
 
 ## **Feature Selection**
 
-### Correlation (Pearson, Kendall, Spearman)
-Correlation-based feature selection involves measuring the correlation between each feature and the target variable. Features with low correlation or no correlation with the target variable are considered less important and can be removed from the dataset.
-
----
-
-### Variance Threshold
-  Variance thresholding is a simple unsupervised feature selection method that removes features with low variance. Features with low variance are generally less informative as they don't change much across the dataset and are often removed to reduce dimensionality.
+### Correlation (Absolute, Inverse)
+Correlation-based feature selection involves measuring the correlation between each feature and the target variable. Features are ranked from highest to lowest score then top N feature that match with feature count selected will be used by the model. Important note whilst causation is not implied, correlation can capture be elements X that predict Y outcomes.
+- Inverse correlation does opposite, it prioritizes features that have a negative correlation with the target variable.
+- Absolute correlation does not take into account the direction of the correlation, it only looks at the strength of the correlation.
 
 ---
 
 ### Recursive Feature Elimination
-  Recursive feature elimination (RFE) is a wrapper method that recursively removes features and builds a model to evaluate the performance at each step. It ranks features based on their importance and eliminates the least important features until the desired number of features is reached.
+  Ranks features based on their importance and eliminates the least important features until the desired number of features is reached.
 
 ---
 
-### Univariate Feature Selection
-Univariate feature selection evaluates each feature individually based on statistical tests to determine its importance. Common methods include SelectKBest and SelectPercentile, which select the top k or a percentage of features, respectively, based on their scores.
-
----
-
-### Information Gain
-Information gain is a feature selection method commonly used in decision trees and ensemble learning algorithms. It measures the reduction in entropy or disorder of the target variable when a feature is included. Features with higher information gain are considered more important and retained.
+### Uni-variate Feature Selection
+Analyzes each single variable within the data-set and ranks them based off the statistical properties of the uni-variate analysis .
 
 ---
 
@@ -141,17 +151,11 @@ Chi-squared test is a statistical test used to determine the association between
 ### Fisher Score
 Fisher score, also known as Fisher discriminant analysis or Fisher's linear discriminant, is a method used for feature selection in classification problems. It evaluates the discriminative power of each feature by comparing the between-class variance to the within-class variance.
 
+---
+
 ### Mutual Information
 Mutual information is a measure of the mutual dependence between two variables. It quantifies the amount of information obtained about one variable by observing another variable. Mutual information is commonly used in feature selection to identify relevant features for prediction tasks.
 
-### L1 Regularization
-L1 regularization, also known as Lasso regularization, adds a penalty term to the loss function based on the absolute values of the coefficients. It encourages sparsity in the model by shrinking less important features to zero, effectively performing feature selection.
-
-### Percentile
-Percentile feature selection selects the top k percentile of features based on their scores. It allows users to specify the percentage of features to retain.
-
-### Linear Regression
-Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. We rank the coefficients of the linear regression model to select the most important features.
 
 ## **Evaluation metrics**
 
@@ -184,3 +188,12 @@ Test accuracy evaluates the performance of classifiers on unseen data, typically
 True Positive (TP), True Negative (TN), False Positive (FP), and False Negative (FN) are fundamental metrics for binary classification models. These metrics quantify the accuracy of predicting positive and negative outcomes. Understanding these metrics is essential for traders to evaluate the effectiveness of their buy/sell signals and risk management strategies.
 
 ---
+
+## Pitfalls & Solutions
+- **Experiment**: Experiment with different models, hyperparameters, and feature selection methods to find the best combination for your dataset. Each model has its strengths and weaknesses, and what works well for one dataset may not work as effectively for another. 
+- **Over-Fitting**: Overfitting occurs when a model learns the training data too well or generalised pattern that only works in test sub-set. This can lead to poor performance on unseen data. To avoid overfitting, keep an eye on the models performance outputs if train accuracy is 1.0 this is a sign of overfitting, other signs could be train accuracy being extremely high for example 99.99% however test accuracy is vastly degraded with value of let say 60.99%.
+- **Over-Complicated**: Generally by increasing amount of features being used, the complexity of the model increases. Each model performs differently to how many features are being fed into it and finding the sweet spot is key to a successful model. Too many features can lead to overfitting and poor generalization, while too few features may result in underfitting and low predictive power.
+- **Data Quantity**: Depending on your selected date ranges and time frames, the amount of data you have available to train your model can have a significant impact on its performance. It is recommended to have a sufficient amount of data to train your model effectively. Having too much or too little data can lead to suboptimal results.
+- **Labels**: Once a backtest is conducted you're able to see support scores for the provided labels, if a great imbalance between the labels this can lead to poor performance. Selecting different labelling methods can help to improve the performance of the model. Using different class balancing methods can also help to improve the performance of the model.
+- **Take Profit and Stop Loss**: Ensure that the take profit and stop loss values are set correctly or adjusted as required. You can have a good model but if these parameters are not set correctly, it can lead to poor performance.
+- **External Factors**: By reviewing backtest results, you can further refine your model by accounting for its weaknesses and adding additional logic to the backtest to improve the logic such as adding additional filters or conditions to the strategy that aim to prevent it executing in conditions you know model performs poorly within.
