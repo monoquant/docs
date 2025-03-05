@@ -1,7 +1,7 @@
 ## What is a Statistical (Stat) Data Point?
 
 Stat Data Point allows you to apply common statistical methods (mean, standard deviation (std), sum, minimum (min), 
-maximum (max)) to your data over rolling window of your choice. Here are a few examples:
+maximum (max), percentile rank, Interquartile Range (iqr), Median Absolute Deviation (mad), percentile rank, quantile threshold) to your data over rolling window of your choice. Here are a few examples:
 
 <img src="/data_nodes/images/stat_dp_mean_example.png" />
 

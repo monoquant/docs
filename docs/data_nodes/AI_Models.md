@@ -8,7 +8,7 @@
 
 ## **How to use the AI Models node**
 The AI model card consists of constant elements and dynamic specific elements that relate to a particular model. 
-
+Think of it as way to create an unlimited amount of strategies with different models and parameters.    
 
 ### AI Model Name
 You use this to set the desired name for the model. This is also used to load a model that has been previously trained on your account.
@@ -32,6 +32,9 @@ Expands options for selected model, where you can then tune model parameters, if
 ### Normalize Data
 This allows you to normalize the data before training the model. Normalization is a common preprocessing step that scales the data to a standard range such as -1 to 1 or 0 - 1. This can help models have better performance, and it's model dependant.
 
+### Enforce Market Regimes
+This allows you to enforce market regimes on the model. Market regimes are distinct periods in the market characterized by specific behaviors or conditions. By enforcing market regimes, you can help the model learn patterns and relationships that are specific to different market conditions, such as trending, ranging, or volatile markets.
+
 ### Validation Methods
 This allows you to select the validation method that the model will use to evaluate its performance. The available validation methods are: 
 - Hold-out (default)
@@ -45,6 +48,8 @@ Data selection method. The options are:
 - Resample data shuffles data before splitting
 - Chunk selection selects data in chunks
 
+### Fitness Regime
+Method used to classify the fitness of the features before being ingested by the model. The options are: PCA or AGGLOMERATION, with further fitness evaluations run with each method. 
 
 ### Class balancing
 This allows you to select which class balancing methods you would like to use. The ones available are:
@@ -83,20 +88,33 @@ This allows you to select which class balancing methods you would like to use. T
     It involves addressing class imbalances collectively across all classes present in the dataset.
 
 
+### Filter TP %
+This allows you to filter out trades that have a take profit percentage below the specified threshold. This can help you focus on trades that have a higher potential for profit.
+
+### Filter SL %
+This allows you to filter out trades that have a stop loss percentage above the specified threshold. This can help you avoid trades that have a higher risk of loss.
+
+### Filter Window
+This allows you to specify the window size for filtering trades based on the take profit and stop loss percentages. The filter window determines the number of trades to consider when applying the take profit and stop loss filters.
+
+### Periods between Labels
+This allows you to specify the number of periods between labels. The periods between labels determine the spacing between training labels, which can affect the model's ability to learn patterns and make predictions.
+
+
 ### Labelling method 
 Allows you to select the labelling method the model will use as the Y predictor.
 
 Here are the current labelling methods that are available to use on the AI models card - 
-1. `Risk Reward` Generates training label signals based on the risk reward ratio parameters. You can specify the threshold for your TP(Take Profit), Risk and Reward Factor.
-2. `Triple Barrier` Generates training label signals based on the triple barrier method. The user can specify the barrier width and the period over which the barrier is calculated.
-3. `PCT Change Matrix` Generates training label signals based on a matrix of percentage changes in price over a given period. The user can specify the period over which the changes are calculated.
-3. `Mean Reversion` Generates training labels signals based off bollinger bands. The user can specify the period over which the bands are calculated.
-5. `Generic` Generates training label signals based off the future outcome similar to triple barrier with 1:1 risk ratio
-6. `AI Candles Cluster` Generates training label signals based off AI Inference of candles. The user can specify the number of clusters and the period over which the clusters are calculated.
-7. `AI Cluster` Generates training label signals based off AI Inference of OHLCV data and other proprietary metrics. The user can specify the number of clusters and the period over which the clusters are calculated.
-8. `MinMax` Generates training label signals based on the min and max price over a given period.
-9. `Peaks and Troughs` Generates training label signals based on the peaks and troughs of the price over a given period. 
-11. `Fixed Time Horizon` Generates training label signals based on fixed period for example we want to train our model to predict trades that will conclude within 12 periods, winning trades are used as the positive class and losing trades are used as the negative class.
+1. `Triple Barrier` Generates training label signals based on the triple barrier method. The user can specify the barrier width and the period over which the barrier is calculated.
+2. `Generic` Generates training label signals based off the future outcome similar to triple barrier with 1:1 risk ratio
+3. `AI Inference` Generates training label signals based on the peaks and troughs of the price over a given period. 
+4. `Peaks and Troughs` Generates training label signals based on the peaks and troughs of the price over a given period. 
+5. `Scalper Paradigm` Generates training label signals based on the peaks and troughs of the price over a given period. 
+6. `Swinging Paradigm` Generates training label signals based on medium-term price swings, capturing cyclical market behavior.
+7. `Volatility Paradigm` Generates training label signals based on measures of volatility, highlighting periods of high and low price fluctuation.
+8. `Trend Paradigm` Generates training label signals by identifying sustained market trends, suitable for trending market conditions.
+9. `Structural Paradigm` Generates training label signals by detecting structural breaks in the market, which signal significant shifts in market behavior.
+10. `STD Paradigm` Generates training label signals based on the standard deviation of price movements, providing a quantitative measure of dispersion and risk.
 
 
 ### Feature Selection 
