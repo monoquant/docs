@@ -30,4 +30,6 @@ The engine considers the volume in the candle when making the trades to avoid is
 by the strategy is greater than the volume recorded in the candle, which is an indication that the price would've moved a lot
 if the order were to take place. To account for that the engine doesn't allow to make trades that are greater than 40% 
 of the volume recorded in the given candle. This is especially important for the cases when you backtest on assets with
-very low liquidity where relatively small trade size might significantly affect the price
+very low liquidity and on small time-frames such as 1m, where relatively small trade size might significantly affect the price.
+Essentially, backtesting engine utilises Fill and Kill (FAK) orders where it executes a portion of the order that it can and kills
+the rest of the order. 
