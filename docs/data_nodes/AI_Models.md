@@ -15,7 +15,7 @@ Think of the AI Model node as a **strategy factory**. It enables:
 ---
 
 ## 🔄 Workflow Overview
-After training a model, it's essential to test it on unseen data. This helps determine how well it generalizes and when to retrain.
+After training a model, it's essential to test it on unseen data. This helps determine how well it generalizes and give indication on intervals of when to retrain it.
 
 ![Workflow]( /data_nodes/images/workflow%20example.png )
 
@@ -162,7 +162,6 @@ Selects feature screening technique before modeling:
 | **Too Little Data** | Expand historical window or use higher timeframes. |
 | **Label Imbalance** | Change labelling method or apply class balancing. |
 | **Wrong SL/TP** | Tune SL/TP filters and validate outcomes. |
-| **Poor Generalization** | Use proper validation (walk-forward, purged K-fold). |
 
 ---
 
