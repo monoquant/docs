@@ -64,6 +64,13 @@ satisfied. Choose 0 to turn off.
   Winning or Losing positions. `Consecutive Wins` and `Consecutive Losses` parameters allow you to choose conditions 
   to trigger this delay. This parameter takes priority over the `Periods Between Entries` parameter.
 
+* `Periods Between Exits` - how many min TF periods should pass after we executed an exit before 
+  we execute a new TP, Trailing TP or conditional exit. This parameter does not prevent exits from Stop Loss, 
+  Breakeven Stop Loss or Trailing Stop Loss. For example, min TF is 1 min. and `Periods Between Exits` is set to 10.
+  If you've executed any kind of exit (TP / Stop Loss / Conditional Exit) at HH:04 then the next earliest exit for
+  TP, Trailing TP or conditional exit can be only at HH:15, Stop Loss, Breakeven and Trailing Stop Loss could be
+  executed at any moment.
+
 ### Hybrid AI Optimization
 
 This is where you can attach a `Hybrid AI Optimization` node, this will allow you to optimize your strategy using AI, 
