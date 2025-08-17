@@ -4,183 +4,194 @@ The **AI Models Node** is the central hub for training and evaluating machine le
 
 ---
 
-## 🧱 Purpose of the AI Models Node
-Think of the AI Model node as a **strategy factory**. It enables:
+## Purpose of the AI Models Node
+The AI Model node acts as a **strategy factory**. It enables:
 - Training of machine learning models (classification or regression)
 - Manual or automated hyperparameter tuning
 - Feature selection and optimization
+- Experimentation with label construction methods
 - Creating multiple models to test and compare
 - Forming hybrid strategies from multiple models
 
 ---
 
-## 🔄 Workflow Overview
-After training a model, it's essential to test it on unseen data. This helps determine how well it generalizes and give indication on intervals of when to retrain it.
+## Workflow Overview
+After training a model, it should always be evaluated on unseen data. This helps determine how well it generalizes and provides an indication of when retraining is required.
 
 ![Workflow]( /data_nodes/images/workflow%20example.png )
 
 ---
 
-## 🔢 Key Configuration Options
+## Key Configuration Options
 
-### **Model Name**
-- Assign a name to your model.
-- Used to save/load models from your account.
-- Re-training a model with the same name will overwrite it.
+### Model Name
+- Assign a unique name to your model.
+- Used to save or load models.
+- Retraining with the same name will overwrite the existing model.
 
-### **Model Selection**
+### Model Selection
 Models are categorized by task type:
 
 - **Classifiers**: Predict directional market movement or events.
-- **Regressors**: Predict numerical values like future price.
-- Neural Networks (Coming Soon)
+- **Regressors**: Predict numerical values such as future prices.
+- Neural networks (planned for future release).
 
-### **Train Switch**
+### Train Switch
 - If enabled, trains a new model.
 - If disabled and the model name exists, loads the pre-trained model.
+- If not ticked and no model exists, the node will train a new model.
 
-### **Manual Tuning**
+### Manual Tuning
 - Enables manual setting of model hyperparameters.
-- If left off, the system auto-tunes parameters using optimization algorithms.
+- If disabled, the system uses automated optimization algorithms.
 
 ---
 
-## 🚀 Advanced Controls
+## Advanced Controls
 
-### **Normalize Data**
+### Normalize Data
 - Scales input features to a standard range.
-- Improves performance of distance-based models (e.g. KNN, SVM).
+- Improves performance of distance-based models such as SVM.
 
-### **Validation Methods**
-Used to evaluate model generalization:
-- **TimeSeries Split**: Maintains chronological order.
-- **Purged K-Fold**: Prevents leakage by purging data between folds.
-- **Walk-Forward**: Simulates live trading evaluation.
+### Custom Trainer (Experimental)
+- Trains models using **risk-adjusted performance metrics** instead of traditional ML metrics.
+- Optimizes on metrics such as **Sortino ratio** rather than AUC or accuracy.
+- Useful when the priority is profitability and risk management in trading contexts.
 
-### **Evaluation Data Handler**
-- **Sliding Window**: Uses data in time order.
-- **Resample Data**: Randomly shuffles before splitting.
-- **Chunk Selection**: Breaks data into discrete chunks.
-
-### **Enforce TA Regimes (Disabled)**
-- Uses fixed technical indicator sets (RSI, VWAP, ATR, SMA, MACD).
-
-### **Enforce Market Regimes (Disabled)**
-- Teaches model behavior across different market regimes (trending, ranging, volatile).
+### Meta Model
+- Creates a meta-model by combining multiple base models.
+- Can function as an ensemble, smoothing predictions or applying weighted voting schemes.
 
 ---
 
-## 📊 Feature Engineering & Selection
+## Label Configuration
 
-### **Feature Selection Methods**
-- **Pearson Correlation (Abs/Inv)**: Ranks by correlation to target.
-- **Recursive Feature Elimination (RFE)**: Iteratively removes least important features.
-- **Univariate**: Statistical strength of individual features.
-- **Chi-Squared**: Useful for categorical data.
-- **Fisher Score**: Ratio of between-class to within-class variance.
-- **Mutual Information**: Captures shared information between features and target.
+### Attempt Label Optimization
+- Automatically searches for the most effective label configuration.
+- Samples combinations of upper, lower, and vertical barriers.
+- Selects the label set that provides the most robust class balance.
 
-### **Feature Optimizer**
-- **Bayesian Optimization**: Efficient search for best feature subset.
-- **Recursive Feature Elimination**: Refines feature importance step-by-step.
+### Filter Labels
+- Filters labels based on user-defined profitability thresholds.
+- Allows configuration of **upper and lower barrier percentages**.
+- Labels not meeting the criteria are removed from training.
+- Reduces noise but may also reduce sample size significantly.
 
-### **Feature Count**
-- Sets number of features used for training.
-- Set to 0 for automatic heuristic selection.
+### Periods Between Labels
+- Controls spacing between labels.
+- Influences the model’s ability to detect short- or long-term patterns.
 
----
+### Labelling Methods
+The current release supports:
 
-## 🌍 Label Configuration
+- **Triple Barrier**: Labels are generated from defined stop-loss, take-profit, and time-based barriers.
+- **Generic**: Labels are created based on a simple threshold of price movement.
+- **AI Inference(Experimental)**: Uses AI-generated labels.
 
-### **Periods Between Labels**
-- Determines spacing between labels.
-- Affects model's ability to detect long/short-term patterns.
+Additional paradigms (Peaks & Troughs, Scalper, Swing, Volatility, Trend, Structural, STD) are planned for future release.
 
-### **Labelling Methods**
-Choose a label generator to define the target (Y variable):
+#### Triple Barrier Parameters
+- **Upper Barrier %**: Percentage move required to trigger a profit label.  
+- **Lower Barrier %**: Percentage move required to trigger a loss label.  
+- **Vertical Barrier Periods**: Maximum number of periods before the trade is force-closed.  
 
-1. **Triple Barrier**: Risk-defined labels using stop-loss/take-profit levels.
-2. **Generic**: Forward-looking label with fixed 1:1 risk/reward.
-3. **AI Inference**: Learns turning points based on price structure.
-4. **Peaks and Troughs**: Simple turning point detection.
-5. **Scalper Paradigm**: High-frequency inflection labeling.
-6. **Swinging Paradigm**: Mid-term trend turning points.
-7. **Volatility Paradigm**: Based on price fluctuation regimes.
-8. **Trend Paradigm**: Labels based on trend persistence.
-9. **Structural Paradigm**: Detects structural shifts in price.
-10. **STD Paradigm**: Labels based on standard deviation signals.
+#### Generic Parameters
+- **Threshold**: Percentage move required to trigger a profit label.  
+- **Future Periods**: How many future periods to consider for label assignment. 
 
----
+#### AI Inference Parameters
+- **Threshold**: Percentage move required to trigger a profit label.  
+- **N Clusters**: Number of clusters for AI-generated labels.
+- **Future Periods**: How many future periods to consider for label assignment.
 
-## 🔒 Filters & Risk Constraints
-
-### **Filter TP % (Take Profit)**
-- Filters out trades below a specified profit threshold.
-
-### **Filter SL % (Stop Loss)**
-- Filters out trades with excessive drawdown risk.
-
-### **Filter Window**
-- Window size used to evaluate SL/TP filters over multiple trades.
+#### Random Parameters
+- **N/A**: Random labels are generated without specific parameters.
 
 ---
 
-## ⚖️ Class Balancing Options
-- **Undersampling**: Reduces majority class samples.
-- **Class Weights**: Weighs samples by inverse frequency.
-- (Temporal SMOTE coming soon)
+## Feature Engineering & Selection
 
-*Note*: Be cautious using class balancing in time series — it may distort temporal integrity.
+### Feature Divisor
+- Controls how many features are retained relative to the number of positive labels.  
+- Formula:  
+Number of Features = Positive Labels / Feature Divisor
+- Prevents overfitting by ensuring feature count scales appropriately with available samples.
 
----
+### Manual Feature Sets
+- When enabled, provides checkboxes for selecting specific feature categories.  
+- By default, the model trains with **all feature sets**.  
+- Useful for testing performance across particular feature families (e.g. momentum-only, volatility-only).
 
-## 📈 Fitness Regime
-Selects feature screening technique before modeling:
-- **PCA**: Principal Component Analysis to reduce dimensionality.
-- **Agglomeration**: Clustering-based feature aggregation.
-
----
-
-## 📈 Evaluation Metrics
-
-### For Classifiers:
-- **AUC Train Score**: Area under ROC curve (training data).
-- **AUC Out-of-Sample**: Area under ROC curve (unseen data).
-
-### For Regressors:
-- **MSE**: Mean Squared Error, lower is better.
-- **R-squared**: Proportion of variance explained, higher is better.
+### Feature Selection Methods
+Available methods include:
+- Mutual Information
+- Pearson Correlation
+- Spearman Correlation
+- Granger Causality
 
 ---
 
-## ⚠️ Common Pitfalls & Best Practices
+## Class Balancing
 
-| Issue | Solution |
-|------|----------|
-| **Overfitting** | Monitor train vs test accuracy. Avoid 100% train accuracy. |
-| **Too Many Features** | Use feature selection + optimization. Simplify model. |
-| **Too Little Data** | Expand historical window or use higher timeframes. |
-| **Label Imbalance** | Change labelling method or apply class balancing. |
-| **Wrong SL/TP** | Tune SL/TP filters and validate outcomes. |
+### Options
+- **Class Weights**: Assigns weights inversely proportional to class frequency.  
+- **Undersampling**: Reduces the majority class to match the size of the minority class.  
 
----
-
-## 🔍 Model Choices
-
-### Classification Models
-- [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
-- [XGBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)
-- [Support Vector Classifier](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
-- [K-Nearest Neighbors](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
-- [AdaBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html)
-- [CatBoost](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier)
-
-### Regression Models
-- [Support Vector Regression (SVR)](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html)
-- [Random Forest Regression](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
-- [XGBoost Regression](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html)
+### Guidance
+- Use **class weights** for most time-series applications to preserve data order.  
+- Undersampling may distort historical context and is best used sparingly.  
 
 ---
 
-## 💪 Pro Tip
-> Train multiple models using different labelling methods and validation techniques. Compare performance and select the most robust candidates for live deployment.
+## Validation & Evaluation
+
+### Validation Methods
+Currently supported:
+- **Purged K-Fold**: Prevents data leakage by purging overlapping samples between folds.
+
+Planned additions:
+- **TimeSeries Split**
+- **Walk-Forward Validation**
+
+### Evaluation Data Handler
+Currently supported:
+- **Sliding Window**: Preserves chronological order.
+
+Planned additions:
+- Resample Data
+- Chunk Selection
+
+---
+
+## Evaluation Metrics
+
+### For Classifiers
+- **AUC Train Score**: Area under the ROC curve (training data).  
+- **AUC Out-of-Sample**: ROC AUC score on unseen data.  
+
+### For Regressors
+- **MSE (Mean Squared Error)**: Lower is better.  
+- **R-squared**: Proportion of variance explained. Higher is better.  
+
+### For Custom Trainer
+- **Sortino Ratio**: Downside-risk-adjusted return. Optimizes risk-weighted profitability.  
+
+---
+
+## Best Practices and Pitfalls
+
+| Issue | Guidance |
+|-------|----------|
+| Overfitting | Monitor train vs. test scores. Avoid 100% train accuracy. |
+| Too many features | Use feature divisor and manual feature sets. |
+| Too little data | Expand historical window or use higher timeframe. |
+| Label imbalance | Apply class weights rather than undersampling. |
+| Barrier settings | Choose parameters carefully. Too narrow → noise; too wide → rare signals. |
+
+---
+
+## Pro Tips
+- Train multiple models using different labelling methods and compare their robustness.  
+- Use the Custom Trainer when evaluating live deployment scenarios where risk-adjusted returns matter more than accuracy.  
+- Use Feature Divisor to safeguard against overfitting when sample size is small.  
+- Always validate on unseen data using Purged K-Fold or Sliding Window before live deployment.
